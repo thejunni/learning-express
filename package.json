@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/server.ts",          
+    "build": "tsc",                         
+    "start": "node dist/server.js",         
+    "migrate": "prisma migrate dev",        
+    "studio": "prisma studio",              
+    "test": "jest --passWithNoTests" 
   },
   "keywords": [],
   "author": "",
@@ -16,6 +21,7 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/node": "^24.5.2",
     "nodemon": "^3.1.10",
