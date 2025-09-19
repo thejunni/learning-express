@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import prisma from "../config/database";
+import { Request, Response } from 'express';
+import prisma from '../config/database';
 
 export const getMedia = async (req: Request, res: Response) => {
   const medias = await prisma.media.findMany({
@@ -16,7 +16,7 @@ export const createMedia = async (req: Request, res: Response) => {
     });
     res.status(201).json(media);
   } catch (error) {
-    res.status(400).json({ error: "Invalid PostId or UserId" });
+    res.status(400).json({ error: 'Invalid PostId or UserId' });
   }
 };
 
@@ -29,6 +29,6 @@ export const getById = async (req: Request, res: Response) => {
     });
     res.status(201).json(media);
   } catch (error) {
-    res.status(404).json({ error: "Invalid Id" });
+    res.status(404).json({ error: 'Invalid Id' });
   }
 };

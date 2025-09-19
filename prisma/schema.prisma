@@ -14,13 +14,14 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
-  name      String
-  email     String    @unique
-  posts     Post[]
-  comments  Comment[]
-  media     Media[]
-  createdAt DateTime  @default(now())
+  id          Int           @id @default(autoincrement())
+  name        String
+  email       String        @unique
+  posts       Post[]
+  comments    Comment[]
+  media       Media[]
+  supermarket Supermarket[]
+  createdAt   DateTime      @default(now())
 }
 
 model Post {
@@ -45,11 +46,21 @@ model Comment {
 }
 
 model Media {
-  id          Int         @id @default(autoincrement())
-  name        String
-  postId      Int
-  post        Post        @relation(fields: [postId], references: [id])
-  userId      Int
-  user        User        @relation(fields: [userId], references: [id])
-  createdAt   DateTime    @default(now())
+  id        Int      @id @default(autoincrement())
+  name      String
+  postId    Int
+  post      Post     @relation(fields: [postId], references: [id])
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+model Supermarket {
+  id        Int      @id @default(autoincrement())
+  nama      String
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  is_open   Boolean
+  address   String
+  createdAt DateTime @default(now())
 }

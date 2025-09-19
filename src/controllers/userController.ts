@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import prisma from "../config/database";
+import { Request, Response } from 'express';
+import prisma from '../config/database';
 
 export const getUsers = async (req: Request, res: Response) => {
   // const users = await prisma.user.findMany();
@@ -15,6 +15,6 @@ export const createUser = async (req: Request, res: Response) => {
     const user = await prisma.user.create({ data: { name, email } });
     res.status(201).json(user);
   } catch (error) {
-    res.status(400).json({ error: "Email already exists" });
+    res.status(400).json({ error: 'Email already exists' });
   }
 };
