@@ -20,15 +20,39 @@ export const createMedia = async (req: Request, res: Response) => {
   }
 };
 
-export const getById = async (req: Request, res: Response) => {
+export const getMediaById = async (req: Request, res: Response) => {
   try {
+    const id = Number(req.params.id);
+
+    if (isNaN(id)) {
+      return res.status(400).json({ error: 'Invalid ID format' });
+    }
+
     const media = await prisma.media.findUnique({
-      where: {
-        id: Number(req.params.id),
-      },
+      where: { id },
+      include: { user: true },
     });
-    res.status(201).json(media);
+
+    if (!media || media.deletedAt) {
+      return res.status(404).json({ error: 'media not found' });
+    }
+
+    return res.status(200).json(media);
   } catch (error) {
-    res.status(404).json({ error: 'Invalid Id' });
+    console.error(error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+export const deleteMedia = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const deleted = await prisma.media.update({
+      where: { id: Number(id) },
+      data: { deletedAt: new Date() },
+    });
+    res.json({ message: 'Media deleted', deleted });
+  } catch (error) {
+    res.status(404).json({ error: 'Media not found' });
   }
 };
