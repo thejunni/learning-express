@@ -18,6 +18,6 @@ app.use('/api/users', userRoutes);
 app.use('/api/posts', postRoutes);
 app.use('/api/comments', commentRoutes);
 app.use('/api/media', mediaRoutes);
-app.use('/api/media', supermarketRoutes);
+app.use('/api/supermarket', supermarketRoutes);
 
 export default app;
